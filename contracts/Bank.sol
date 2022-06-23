@@ -14,18 +14,19 @@ contract Bank {
         owner = msg.sender;
     }
 
-    function deposit() public payable{
+    function deposit() external payable{
+        require(msg.value != 0, "You need to deposit some amount of money!");
         customerbalance[msg.sender] += msg.value;
         console.log("%s",msg.sender," deposited ",msg.value);
     }
 
-    function viewbalance() public view returns(uint256)
+    function viewbalance() external view returns(uint256)
     {
         console.log(msg.sender,"'s Balance = ", customerbalance[msg.sender],"\n");
         return(customerbalance[msg.sender]);
     }
     
-    function withdraw(uint256 _amount) public payable{
+    function withdraw(uint256 _amount) external payable{
         if(_amount <= customerbalance[msg.sender])
         {
             (bool success, ) = (msg.sender).call{value: _amount}("");
@@ -40,7 +41,7 @@ contract Bank {
         }
     }
 
-    function bankbalance() public view returns(uint256)
+    function bankbalance() external view returns(uint256)
     {
         require(msg.sender == owner,"You must be the owner of the bank to see all balances.");
         console.log("Bank Balance: ", address(this).balance, "\n");
