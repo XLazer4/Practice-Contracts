@@ -5,7 +5,7 @@ const main = async () => {
   console.log("Deploying contracts with account: ", deployer.address);
   console.log("Account balance: ", accountBalance.toString());
 
-  const ContractFactory = await hre.ethers.getContractFactory("Bank");
+  const ContractFactory = await hre.ethers.getContractFactory("duckcoin");
   const Contract = await ContractFactory.deploy();
   await Contract.deployed();
 
