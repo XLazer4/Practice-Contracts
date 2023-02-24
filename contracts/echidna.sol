@@ -1,5 +1,5 @@
 //SPDX-License-Identifier: MIT
-pragma solidity ^0.8;
+pragma solidity ^0.8.16;
 
 contract Counter {
     uint public count;
@@ -15,7 +15,7 @@ contract Counter {
 
 contract Echidna is Counter {
     bool private pass = true;
-    uint private createdAt = block.timestamp;
+    uint private immutable createdAt = block.timestamp;
 
     function echidna_test_timestamp() public view returns (bool) {
         return pass;
