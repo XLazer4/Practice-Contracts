@@ -5,11 +5,11 @@ import "hardhat/console.sol";
 // import "@openzeppelin/contracts/access/Ownable.sol"; 
 // https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/access/Ownable.sol
 
-contract YourContract {
+contract NewContract {
 
     uint256 public balance;
     address public owner;
-    string public bankname;
+    string public bankname = "contract 2";
     mapping(address => uint256) customerbalance;
 
     constructor() {
