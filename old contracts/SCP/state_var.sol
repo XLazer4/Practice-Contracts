@@ -8,10 +8,6 @@ contract state_var {
         test = _test;
     }
 
-    function view_test() public view returns (string memory) {
-        return test;
-    }
-
     function set2(string calldata _test) public {
         test = _test;
     }
