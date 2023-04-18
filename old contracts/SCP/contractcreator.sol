@@ -21,10 +21,35 @@ contract CarFactory {
         cars.push(car);
     }
 
-    function create2(
-        string memory _model,
-        bytes32 _salt
-    ) public {
+    function getAddress(
+        bytes32 salt,
+        string memory arg
+    ) external view returns (address) {
+        address addr = address(
+            uint160(
+                uint(
+                    keccak256(
+                        abi.encodePacked(
+                            bytes1(0xff),
+                            address(this),
+                            salt,
+                            keccak256(
+                                abi.encodePacked(type(Car).creationCode, arg)
+                            )
+                        )
+                    )
+                )
+            )
+        );
+
+        return addr;
+    }
+
+    function getBytes32(uint salt) external pure returns (bytes32) {
+        return bytes32(salt);
+    }
+
+    function create2(string memory _model, bytes32 _salt) public {
         Car car = (new Car){salt: _salt}(_model);
         cars.push(car);
     }
@@ -34,11 +59,7 @@ contract CarFactory {
     )
         public
         view
-        returns (
-            address owner,
-            string memory model,
-            address carAddr
-        )
+        returns (address owner, string memory model, address carAddr)
     {
         Car car = cars[_index];
 
